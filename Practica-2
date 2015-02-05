@@ -1,0 +1,38 @@
+/*
+ Creamos la tabla dance 
+ */ 
+
+ 
+create table dance (id_dance integer, nombre varchar2(120), constraint pk_id_dance primary key (id_dance)); 
+ 
+ 
+ --Creamos la secuencia correspondiente 
+
+ 
+create sequence sec_dance 
+start with 1 
+increment by 1 
+nomaxvalue; 
+/* 
+15 Creamos el procedimiento almacenado que nos enlazara ls secuencia con la tabla dance 
+16 */ 
+CREATE OR REPLACE PROCEDURE GUARDAR_DANCE(MY_ID OUT INTEGER, MY_NOMBRE IN VARCHAR2) 
+AS 
+  BEGIN 
+SELECT SEC_DANCE.NEXTVAL INTO  MY_ID FROM DUAL; 
+INSERT INTO DANCE(ID_DANCE, NOMBRE) VALUES(MY_ID, MY_NOMBRE); 
+END; 
+/ 
+
+/*
+Insertar en el TABLE DANCE
+*/
+
+SET SERVEROUTPUT ON;
+DECLARE
+VALOR INTEGER;
+BEGIN
+GUARDAR_DANCE(VALOR,'TU NOMBRE');
+dbms_output.PUT_LINE('Se ensarto con exito'||VALOR);
+END;
+/
