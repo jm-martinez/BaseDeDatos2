@@ -1,0 +1,33 @@
+-Ejercicio 1:
+DECLARE
+valor Integer;
+BEGIN
+valor:=2;
+FOR i IN 1..10 LOOP
+valor:=valor*i;
+DBMS_OUTPUT.PUT_LINE('El valor es '||valor);
+END LOOP;
+END;
+/
+
+--Ejercicio 2: Crear una tabla y meter 10,000 registros
+--Paso 1: Creamos la tabla.
+CREATE TABLE PRUEBA1(ID_PRUEBA INTEGER, NOMBRE VARCHAR2(80));
+BEGIN
+FOR i IN 1..10000 LOOP
+INSERT INTO PRUEBA1 VALUES(i, 'Brandon y Juan');
+END LOOP;
+END;
+/
+SELECT * FROM PRUEBA1;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/* Primero creamos la tabla pelicula */
+
+create table pelicula (id_pelicula integer, titulo varchar2(120), sinopsis varchar2(320), constraint pk_id_pelicula primary key (id_pelicula));
+create table sala (id_sala integer, id_pelicula integer, sala integer, constraint pk_id_sala primary key (id_sala), constraint fk1_id_pelicula foreign key (id_pelicula) references pelicula(id_pelicula));
+
+insert into pelicula(id_pelicula,titulo,sinopsis) values(1,'avatar','es una pelicula que me hizo reir');
+insert into sala(id_sala,id_pelicula,sala) values(1,1,1);
+insert into sala(id_sala,id_pelicula,sala) values(1,5,1);
