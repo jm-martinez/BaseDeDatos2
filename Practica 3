@@ -1,0 +1,28 @@
+create table usuario_xxx(id_usuario integer, login varchar2(120), edad integer, constraint pk_id_usuario primary key (id_usuario));
+
+create sequence sec_usuario_xxx
+start with 1 
+increment by 1 
+nomaxvalue; 
+
+CREATE OR REPLACE PROCEDURE GUARDAR_USUARIO_XXX(MY_ID OUT INTEGER, MY_LOGIN IN VARCHAR2, MY_EDAD IN integer) AS 
+ BEGIN
+ IF ((MY_EDAD >= 18) and (MY_EDAD <= 100)) THEN
+  SELECT SEC_USUARIO_XXX.NEXTVAL INTO  MY_ID FROM DUAL;
+  INSERT INTO usuario_xxx(ID_USUARIO, LOGIN, EDAD) VALUES(MY_ID, MY_LOGIN, MY_EDAD); 
+  ELSE
+  RAISE_APPLICATION_ERROR(-20001, 'LO SIENTO ESTAS CHAVO, VETE A VER A BARNEY');
+  END IF;
+  END;
+  /
+  
+  SET SERVEROUTPUT ON;
+  DECLARE VALOR INTEGER;
+  BEGIN
+  guardar_usuario_xxx(VALOR,'PERVERSO7',170);
+  DBMS_OUTPUT.PUT_LINE('YA TE REGISTRAMOS');
+  END;  
+  / 
+
+ SELECT * FROM usuario_xxx;
+  
